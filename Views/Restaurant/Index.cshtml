@@ -1,0 +1,37 @@
+﻿@model ASPCoreHOL.ViewModels.RestaurantViewModel
+
+@{
+
+}
+
+
+<h1 class="h3 mb-4 text-gray-800">List Of Restaurant</h1>
+<p>Username: @ViewData["username"] dan Address: @ViewBag.address</p>
+<p>List of Name :</p>
+<ul>
+    @foreach (var name in ViewBag.arrName)
+    {
+        <li>@name</li>
+    }
+</ul>
+<hr />
+<p><a asp-action="Create" class="btn btn-primary btn-sm">Add Restaurant</a></p>
+<table class="table table-striped">
+    <tr>
+        <td>Id</td>
+        <td>Name</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    @foreach (var restaurant in Model.Restaurants)
+    {
+        <tr>
+            <td>@restaurant.Id</td>
+            <td>@restaurant.Name</td>
+            <td><a asp-action="Details" asp-route-id="@restaurant.Id" class="btn btn-success btn-sm">detail</a></td>
+            <td><a asp-action="Edit" asp-route-id="@restaurant.Id" class="btn btn-warning btn-sm">edit</a></td>
+            <td><a asp-action="Delete" asp-route-id="@restaurant.Id" class="btn btn-danger btn-sm">delete</a></td>
+        </tr>
+    }
+</table>
