@@ -15,6 +15,13 @@
     }
 </ul>
 <hr />
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-success" role="alert">
+        @ViewBag.Message
+    </div>
+}
+
 <p><a asp-action="Create" class="btn btn-primary btn-sm">Add Restaurant</a></p>
 <table class="table table-striped">
     <tr>

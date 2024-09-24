@@ -16,6 +16,11 @@ public class RestaurantController : Controller
 
     public IActionResult Index()
     {
+        if (TempData["Message"] != null)
+        {
+            ViewBag.Message = TempData["Message"];
+        }
+
         string username = "John Doe";
         ViewData["username"] = username;
 
@@ -32,6 +37,11 @@ public class RestaurantController : Controller
 
     public IActionResult Details(int id)
     {
+        if (TempData["Message"] != null)
+        {
+            ViewBag.Message = TempData["Message"];
+        }
+
         var model = _restaurantData.Get(id);
         if (model == null)
         {
@@ -48,9 +58,73 @@ public class RestaurantController : Controller
     [HttpPost]
     public IActionResult Create(Restaurant restaurant)
     {
-        _restaurantData.Add(restaurant);
-        //return RedirectToAction(nameof(Details), new { id = restaurant.Id });
-        return RedirectToAction(nameof(Index));
+        try
+        {
+            _restaurantData.Add(restaurant);
+            TempData["Message"] = "Restaurant saved!";
+            return RedirectToAction(nameof(Details), new { id = restaurant.Id });
+
+        }
+        catch (Exception ex)
+        {
+            ViewBag.ErrorMessage = $"<span css='alert alert-danger'>{ex.Message}</span>";
+            return View(restaurant);
+        }
+    }
+
+    public IActionResult Edit(int id)
+    {
+        Restaurant model = _restaurantData.Get(id);
+
+        if (model == null)
+        {
+            return RedirectToAction(nameof(Index));
+        }
+        return View(model);
+    }
+
+    [HttpPost]
+    public IActionResult Edit(Restaurant restaurant)
+    {
+        try
+        {
+            _restaurantData.Update(restaurant);
+            TempData["Message"] = "Restaurant saved!";
+            return RedirectToAction(nameof(Details), new { id = restaurant.Id });
+        }
+        catch (Exception ex)
+        {
+            ViewBag.ErrorMessage = $"<span css='alert alert-danger'>{ex.Message}</span>";
+            return View(restaurant);
+        }
+    }
+
+    public IActionResult Delete(int id)
+    {
+        Restaurant model = _restaurantData.Get(id);
+
+        if (model == null)
+        {
+            return RedirectToAction(nameof(Index));
+        }
+        return View(model);
+    }
+
+    [HttpPost]
+    [ActionName("Delete")]
+    public IActionResult DeletePost(Restaurant restaurant)
+    {
+        try
+        {
+            _restaurantData.Delete(restaurant.Id);
+            TempData["Message"] = "Restaurant deleted!";
+            return RedirectToAction(nameof(Index));
+        }
+        catch (Exception ex)
+        {
+            ViewBag.ErrorMessage = $"<span css='alert alert-danger'>{ex.Message}</span>";
+            return View(restaurant);
+        }
     }
 
     public IActionResult Privacy()

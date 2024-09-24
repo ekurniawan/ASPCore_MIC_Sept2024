@@ -1,5 +1,6 @@
 using System;
 using ASPCoreHOL.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ASPCoreHOL.Services;
 
@@ -27,7 +28,15 @@ public class RestaurantData : IRestaurantData
 
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        var restaurant = Get(id);
+        if (restaurant != null)
+        {
+            _restaurants.Remove(restaurant);
+        }
+        else
+        {
+            throw new Exception("Restaurant not found");
+        }
     }
 
     public Restaurant Get(int id)
@@ -50,6 +59,15 @@ public class RestaurantData : IRestaurantData
 
     public Restaurant Update(Restaurant updatedRestaurant)
     {
-        throw new NotImplementedException();
+        var restaurant = Get(updatedRestaurant.Id);
+        if (restaurant != null)
+        {
+            restaurant.Name = updatedRestaurant.Name;
+            return restaurant;
+        }
+        else
+        {
+            throw new Exception("Restaurant not found");
+        }
     }
 }
