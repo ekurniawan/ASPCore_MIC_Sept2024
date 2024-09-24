@@ -1,8 +1,16 @@
+using ASPCoreHOL.Data;
 using ASPCoreHOL.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
+
+//menambahkan EF
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
 //menambahkan DI
 builder.Services.AddScoped<IRestaurantData, RestaurantADO>();
