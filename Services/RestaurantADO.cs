@@ -24,7 +24,30 @@ public class RestaurantADO : IRestaurantData
 
     public Restaurant Get(int id)
     {
-        throw new NotImplementedException();
+        Restaurant restaurant = new Restaurant();
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            string strSql = @"SELECT Id, Name FROM Restaurants
+                              WHERE Id = @Id";
+            using (SqlCommand cmd = new SqlCommand(strSql, conn))
+            {
+                cmd.Parameters.AddWithValue("@Id", id);
+                conn.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    dr.Read();
+                    restaurant.Id = Convert.ToInt32(dr["Id"]);
+                    restaurant.Name = dr["Name"].ToString();
+                }
+                else
+                {
+                    throw new Exception("Data tidak ditemukan");
+                }
+                dr.Close();
+            }
+            return restaurant;
+        }
     }
 
     public IEnumerable<Restaurant> GetAll()

@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 //menambahkan DI
-builder.Services.AddSingleton<IRestaurantData, RestaurantData>();
+builder.Services.AddScoped<IRestaurantData, RestaurantADO>();
 
 var app = builder.Build();
 
