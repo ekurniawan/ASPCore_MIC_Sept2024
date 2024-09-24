@@ -56,10 +56,16 @@ public class RestaurantController : Controller
     }
 
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public IActionResult Create(Restaurant restaurant)
     {
         try
         {
+            if (!ModelState.IsValid)
+            {
+                return View(restaurant);
+            }
+
             _restaurantData.Add(restaurant);
             TempData["Message"] = "Restaurant saved!";
             return RedirectToAction(nameof(Details), new { id = restaurant.Id });
@@ -88,6 +94,11 @@ public class RestaurantController : Controller
     {
         try
         {
+            if (!ModelState.IsValid)
+            {
+                return View(restaurant);
+            }
+
             _restaurantData.Update(restaurant);
             TempData["Message"] = "Restaurant saved!";
             return RedirectToAction(nameof(Details), new { id = restaurant.Id });

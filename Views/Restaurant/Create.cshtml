@@ -10,8 +10,10 @@
             </div>
             <div class="card-body">
                 <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <input asp-for="Name" class="form-control form-control-user" placeholder="Restaurant Name" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary btn-user btn-block" value="Create" />
@@ -21,3 +23,9 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
