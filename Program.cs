@@ -13,7 +13,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 });
 
 //menambahkan DI
-builder.Services.AddScoped<IRestaurantData, RestaurantADO>();
+builder.Services.AddScoped<IRestaurantData, RestaurantEF>();
 
 var app = builder.Build();
 
