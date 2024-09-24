@@ -9,7 +9,7 @@ builder.Services.AddControllersWithViews();
 //menambahkan EF
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("EFCodeFirstConnection"));
 });
 
 //menambahkan DI

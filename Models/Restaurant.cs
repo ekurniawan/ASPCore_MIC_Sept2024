@@ -9,4 +9,6 @@ public class Restaurant
 
     [Required(ErrorMessage = "Please enter the restaurant name")]
     public string? Name { get; set; }
+    public int LocationId { get; set; }
+    public Location Location { get; set; } = null!;
 }
