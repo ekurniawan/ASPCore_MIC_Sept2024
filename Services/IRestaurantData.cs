@@ -9,4 +9,5 @@ public interface IRestaurantData
     Restaurant Add(Restaurant newRestaurant);
     Restaurant Update(Restaurant updatedRestaurant);
     void Delete(int id);
+    IEnumerable<Restaurant> GetRestaurantsByName(string name);
 }

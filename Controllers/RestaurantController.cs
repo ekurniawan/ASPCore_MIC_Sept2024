@@ -127,6 +127,30 @@ public class RestaurantController : Controller
         }
     }
 
+    [HttpPost]
+    public IActionResult SearchByName(string searchString)
+    {
+        try
+        {
+            var model = _restaurantData.GetRestaurantsByName(searchString);
+            if (model == null)
+            {
+                TempData["Message"] = "No data found!";
+                return RedirectToAction(nameof(Index));
+            }
+
+            RestaurantViewModel restaurantViewModel = new RestaurantViewModel();
+            restaurantViewModel.Restaurants = model;
+
+            return View("Index", restaurantViewModel);
+        }
+        catch (System.Exception ex)
+        {
+            ViewBag.ErrorMessage = $"<span css='alert alert-danger'>{ex.Message}</span>";
+            return View("Index");
+        }
+    }
+
     public IActionResult Privacy()
     {
         return Content("Privacy");

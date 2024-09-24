@@ -1,19 +1,7 @@
 ﻿@model ASPCoreHOL.ViewModels.RestaurantViewModel
 
-@{
-
-}
-
-
 <h1 class="h3 mb-4 text-gray-800">List Of Restaurant</h1>
-<p>Username: @ViewData["username"] dan Address: @ViewBag.address</p>
-<p>List of Name :</p>
-<ul>
-    @foreach (var name in ViewBag.arrName)
-    {
-        <li>@name</li>
-    }
-</ul>
+
 <hr />
 @if (ViewBag.Message != null)
 {
@@ -22,6 +10,13 @@
     </div>
 }
 
+<form asp-action="SearchByName">
+    <div class="form-group">
+        <input type="text" name="searchString" class="form-control" placeholder="Search By Name" />
+    </div>
+    <button type="submit" class="btn btn-primary btn-sm">Search</button>
+</form>
+<br />
 <p><a asp-action="Create" class="btn btn-primary btn-sm">Add Restaurant</a></p>
 <table class="table table-striped">
     <tr>

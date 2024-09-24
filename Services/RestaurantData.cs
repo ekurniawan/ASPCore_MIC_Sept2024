@@ -57,6 +57,11 @@ public class RestaurantData : IRestaurantData
         return _restaurants.OrderBy(r => r.Name);
     }
 
+    public IEnumerable<Restaurant> GetRestaurantsByName(string name)
+    {
+        throw new NotImplementedException();
+    }
+
     public Restaurant Update(Restaurant updatedRestaurant)
     {
         var restaurant = Get(updatedRestaurant.Id);
