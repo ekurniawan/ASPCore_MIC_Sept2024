@@ -127,7 +127,6 @@ public class RestaurantController : Controller
         }
     }
 
-    [HttpPost]
     public IActionResult SearchByName(string searchString)
     {
         try
