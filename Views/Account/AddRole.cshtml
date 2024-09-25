@@ -1,0 +1,31 @@
+﻿@model ASPCoreHOL.ViewModels.RoleCreateViewModel
+
+@{
+}
+<div class="row">
+    <div class="col-lg-4">
+        <div class="card mb-4">
+            <div class="card-header">
+                Add Restaurant
+            </div>
+            <div class="card-body">
+                <form asp-action="AddRole">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <input asp-for="RoleName" class="form-control form-control-user" placeholder="Role Name" />
+                        <span asp-validation-for="RoleName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary btn-user btn-block" value="Create" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

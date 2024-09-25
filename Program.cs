@@ -40,6 +40,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<IRestaurantData, RestaurantEF>();
 builder.Services.AddScoped<IUser, UserEF>();
 builder.Services.AddScoped<IAccountData, AccountEF>();
+builder.Services.AddScoped<ILocationData, LocationData>();
 
 var app = builder.Build();
 

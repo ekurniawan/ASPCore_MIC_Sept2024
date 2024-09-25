@@ -162,6 +162,31 @@ public class AccountController : Controller
         }
     }
 
+    public IActionResult AddRole()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> AddRole(string rolename)
+    {
+        try
+        {
+            await _accountData.AddRole(rolename);
+            ViewBag.Message = "Role added successfully";
+        }
+        catch (Exception ex)
+        {
+            ModelState.AddModelError(string.Empty, ex.Message);
+        }
+
+        return View();
+    }
+
+    public IActionResult AsignUserToRole()
+    {
+        return View();
+    }
 
     #endregion
 
