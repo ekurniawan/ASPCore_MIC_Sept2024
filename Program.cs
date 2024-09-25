@@ -9,7 +9,13 @@ builder.Services.AddControllersWithViews();
 
 //menambahkan autentikasi
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie();
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Account/Login";
+        options.AccessDeniedPath = "/Account/AccessDenied";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+        options.SlidingExpiration = true;
+    });
 
 //menambahkan EF
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

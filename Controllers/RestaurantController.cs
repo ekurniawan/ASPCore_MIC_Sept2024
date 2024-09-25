@@ -37,6 +37,7 @@ public class RestaurantController : Controller
         return View(restaurantViewModel);
     }
 
+    [Authorize(Roles = "admin")]
     public IActionResult Details(int id)
     {
         if (TempData["Message"] != null)
@@ -52,6 +53,7 @@ public class RestaurantController : Controller
         return View(model);
     }
 
+    [Authorize(Roles = "admin")]
     public IActionResult Create()
     {
         return View();
@@ -80,6 +82,7 @@ public class RestaurantController : Controller
         }
     }
 
+    [Authorize(Roles = "admin")]
     public IActionResult Edit(int id)
     {
         Restaurant model = _restaurantData.Get(id);
@@ -112,6 +115,7 @@ public class RestaurantController : Controller
         }
     }
 
+    [Authorize(Roles = "admin")]
     public IActionResult Delete(int id)
     {
         Restaurant model = _restaurantData.Get(id);
