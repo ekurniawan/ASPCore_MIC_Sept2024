@@ -19,6 +19,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 //menambahkan DI
 builder.Services.AddScoped<IRestaurantData, RestaurantEF>();
+builder.Services.AddScoped<IUser, UserEF>();
 
 var app = builder.Build();
 
