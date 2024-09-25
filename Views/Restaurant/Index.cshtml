@@ -22,6 +22,7 @@
     <tr>
         <td>Id</td>
         <td>Name</td>
+        <td>Location</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
@@ -31,6 +32,7 @@
         <tr>
             <td>@restaurant.Id</td>
             <td>@restaurant.Name</td>
+            <td>@restaurant.Location.LocationName</td>
             <td><a asp-action="Details" asp-route-id="@restaurant.Id" class="btn btn-success btn-sm">detail</a></td>
             <td><a asp-action="Edit" asp-route-id="@restaurant.Id" class="btn btn-warning btn-sm">edit</a></td>
             <td><a asp-action="Delete" asp-route-id="@restaurant.Id" class="btn btn-danger btn-sm">delete</a></td>

@@ -1,6 +1,7 @@
 using System;
 using ASPCoreHOL.Data;
 using ASPCoreHOL.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ASPCoreHOL.Services;
 
@@ -52,7 +53,7 @@ public class RestaurantEF : IRestaurantData
 
     public IEnumerable<Restaurant> GetAll()
     {
-        var restaurants = _db.Restaurants.OrderBy(r => r.Name);
+        var restaurants = _db.Restaurants.Include(r => r.Location).OrderBy(r => r.Name);
         return restaurants;
     }
 
