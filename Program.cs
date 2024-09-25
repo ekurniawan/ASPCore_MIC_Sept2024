@@ -1,6 +1,7 @@
 using ASPCoreHOL.Data;
 using ASPCoreHOL.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,9 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.SlidingExpiration = true;
     });
 
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+
 //menambahkan EF
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
@@ -26,6 +30,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 //menambahkan DI
 builder.Services.AddScoped<IRestaurantData, RestaurantEF>();
 builder.Services.AddScoped<IUser, UserEF>();
+builder.Services.AddScoped<IAccountData, AccountEF>();
 
 var app = builder.Build();
 

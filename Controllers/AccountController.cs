@@ -14,9 +14,12 @@ namespace ASPCoreHOL.Controllers;
 public class AccountController : Controller
 {
     private readonly IUser _user;
-    public AccountController(IUser user)
+    private readonly IAccountData _accountData;
+
+    public AccountController(IUser user, IAccountData accountData)
     {
         _user = user;
+        _accountData = accountData;
     }
 
     public IActionResult Login()
@@ -66,6 +69,7 @@ public class AccountController : Controller
     }
 
 
+
     public IActionResult Register()
     {
         return View();
@@ -87,6 +91,32 @@ public class AccountController : Controller
             try
             {
                 _user.Registration(user);
+                ViewBag.Message = "Registration successful";
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+            }
+        }
+
+        return View(model);
+    }
+
+
+    public IActionResult Registration()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Registration(RegistrationViewModel model)
+    {
+        if (ModelState.IsValid)
+        {
+            // Registration
+            try
+            {
+                await _accountData.Register(model);
                 ViewBag.Message = "Registration successful";
             }
             catch (Exception ex)
