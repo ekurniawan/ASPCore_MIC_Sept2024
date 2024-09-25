@@ -7,6 +7,7 @@ public class HomeController : Controller
 {
     public IActionResult Index()
     {
+        ViewBag.Username = User.Identity.Name;
         return View();
     }
 

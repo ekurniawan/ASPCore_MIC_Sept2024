@@ -2,10 +2,12 @@ using System;
 using ASPCoreHOL.Models;
 using ASPCoreHOL.Services;
 using ASPCoreHOL.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ASPCoreHOL.Controllers;
 
+[Authorize]
 public class RestaurantController : Controller
 {
     private readonly IRestaurantData _restaurantData;
