@@ -102,6 +102,15 @@ public class AccountController : Controller
         return View(model);
     }
 
+    public async Task<IActionResult> Logout()
+    {
+        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        return RedirectToAction("Login", "Account");
+    }
+
+
+    //asp identity
+    #region  ASP Identity
 
     public IActionResult Registration()
     {
@@ -128,10 +137,34 @@ public class AccountController : Controller
         return View(model);
     }
 
-    public async Task<IActionResult> Logout()
+    public IActionResult SignIn()
     {
-        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-        return RedirectToAction("Login", "Account");
+        return View();
     }
+
+    [HttpPost]
+    public async Task<IActionResult> SignIn(UserViewModel userViewModel)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(userViewModel);
+        }
+
+        var result = await _accountData.Login(userViewModel);
+        if (result)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+        else
+        {
+            ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+            return View(userViewModel);
+        }
+    }
+
+
+    #endregion
+
+
 
 }
